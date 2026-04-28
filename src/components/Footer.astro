@@ -1,0 +1,27 @@
+---
+const year = new Date().getFullYear();
+---
+
+<footer class="border-t border-[var(--color-border)]/60 py-12">
+  <div class="mx-auto max-w-6xl px-6">
+    <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+      <div class="flex items-center gap-2 font-bold tracking-tight">
+        <span class="inline-block w-2 h-2 rounded-full bg-[var(--color-accent)]"></span>
+        <span>Fabri<span class="text-[var(--color-accent)]">.</span>web</span>
+      </div>
+
+      <div class="flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-[var(--color-fg-muted)]">
+        <a href="/solicitar" class="hover:text-[var(--color-fg)] transition">Solicitar sitio</a>
+        <a href="#planes" class="hover:text-[var(--color-fg)] transition">Planes</a>
+        <a href="#faq" class="hover:text-[var(--color-fg)] transition">FAQ</a>
+        <a href="https://www.linkedin.com/in/fabricio-bianchi/" target="_blank" rel="noopener" class="hover:text-[var(--color-fg)] transition">LinkedIn</a>
+        <a href="https://github.com/fb91" target="_blank" rel="noopener" class="hover:text-[var(--color-fg)] transition">GitHub</a>
+        <a href="/archivo" class="hover:text-[var(--color-fg)] transition text-[var(--color-fg-subtle)]">Archivo</a>
+      </div>
+    </div>
+
+    <div class="mt-8 pt-6 border-t border-[var(--color-border)]/40 text-xs text-[var(--color-fg-subtle)]">
+      © {year} Fabricio Bianchi · Hecho con cariño desde Rosario, Argentina.
+    </div>
+  </div>
+</footer>

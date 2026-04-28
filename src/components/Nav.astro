@@ -1,0 +1,31 @@
+---
+const links = [
+  { href: "#planes", label: "Planes" },
+  { href: "#como-funciona", label: "Cómo funciona" },
+  { href: "#trabajos", label: "Trabajos" },
+  { href: "#faq", label: "FAQ" },
+];
+---
+
+<header class="fixed top-0 inset-x-0 z-50 backdrop-blur-md bg-[var(--color-bg)]/70 border-b border-[var(--color-border)]/60">
+  <nav class="mx-auto max-w-6xl px-6 h-16 flex items-center justify-between">
+    <a href="/" class="flex items-center gap-2 font-bold tracking-tight">
+      <span class="inline-block w-2.5 h-2.5 rounded-full bg-[var(--color-accent)] glow"></span>
+      <span>Fabri<span class="text-[var(--color-accent)]">.</span>web</span>
+    </a>
+
+    <ul class="hidden md:flex items-center gap-8 text-sm text-[var(--color-fg-muted)]">
+      {links.map((l) => (
+        <li><a href={l.href} class="hover:text-[var(--color-fg)] transition">{l.label}</a></li>
+      ))}
+    </ul>
+
+    <a
+      href="/solicitar"
+      class="inline-flex items-center gap-2 rounded-full bg-[var(--color-accent)] text-[var(--color-accent-fg)] px-4 py-2 text-sm font-semibold hover:bg-[var(--color-accent-soft)] transition"
+    >
+      Solicitá tu sitio
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+    </a>
+  </nav>
+</header>

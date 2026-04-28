@@ -1,0 +1,62 @@
+---
+const stats = [
+  { value: "< 24h", label: "Entrega" },
+  { value: "Desde $80k", label: "Inversión inicial" },
+  { value: "100/100", label: "Performance" },
+  { value: "0", label: "Contratos largos" },
+];
+---
+
+<section class="relative pt-32 pb-24 md:pt-40 md:pb-32 overflow-hidden noise">
+  <div
+    class="absolute -top-20 left-1/2 -translate-x-1/2 w-[800px] h-[800px] rounded-full pointer-events-none"
+    style="background: radial-gradient(circle, rgba(249,115,22,0.15) 0%, transparent 60%);"
+  >
+  </div>
+
+  <div class="relative mx-auto max-w-6xl px-6">
+    <div class="flex flex-col items-center text-center">
+      <div class="inline-flex items-center gap-2 rounded-full border border-[var(--color-border)] bg-[var(--color-surface)]/60 px-3 py-1.5 text-xs text-[var(--color-fg-muted)] mb-8">
+        <span class="relative flex h-2 w-2">
+          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[var(--color-accent)] opacity-75"></span>
+          <span class="relative inline-flex rounded-full h-2 w-2 bg-[var(--color-accent)]"></span>
+        </span>
+        Aceptando 3 proyectos este mes
+      </div>
+
+      <h1 class="text-4xl md:text-6xl lg:text-7xl font-extrabold tracking-tight max-w-4xl">
+        <span class="gradient-text">Sitios web profesionales</span><br />
+        para tu negocio<span class="text-[var(--color-accent)]">.</span>
+      </h1>
+
+      <p class="mt-6 max-w-2xl text-lg md:text-xl text-[var(--color-fg-muted)]">
+        Páginas modernas, rápidas y optimizadas para que tu pequeña empresa atraiga más clientes. Sin complicaciones, sin contratos eternos.
+      </p>
+
+      <div class="mt-10 flex flex-col sm:flex-row items-center gap-4">
+        <a
+          href="/solicitar"
+          class="group inline-flex items-center gap-2 rounded-full bg-[var(--color-accent)] text-[var(--color-accent-fg)] px-7 py-4 text-base font-semibold hover:bg-[var(--color-accent-soft)] transition glow"
+        >
+          Solicitá tu sitio
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="group-hover:translate-x-0.5 transition"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </a>
+        <a
+          href="#planes"
+          class="inline-flex items-center gap-2 rounded-full border border-[var(--color-border)] bg-[var(--color-surface)]/40 px-7 py-4 text-base font-semibold hover:bg-[var(--color-surface)] transition"
+        >
+          Ver planes
+        </a>
+      </div>
+
+      <div class="mt-16 grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-12 w-full max-w-3xl">
+        {stats.map((s) => (
+          <div class="text-center">
+            <div class="text-2xl md:text-3xl font-bold text-[var(--color-fg)]">{s.value}</div>
+            <div class="mt-1 text-xs md:text-sm uppercase tracking-wider text-[var(--color-fg-subtle)]">{s.label}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
