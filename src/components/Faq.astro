@@ -1,0 +1,51 @@
+---
+const faqs = [
+  {
+    q: "¿Cuánto tarda en estar online?",
+    a: "Una vez que confirmamos los detalles del trabajo y los datos están completos, el sitio queda online en menos de 24 horas.",
+  },
+  {
+    q: "¿Hay contratos largos o permanencia?",
+    a: "No. Pagás un setup inicial y un mantenimiento mensual bajo. Si en algún momento no querés seguir, simplemente lo terminamos.",
+  },
+  {
+    q: "¿Qué incluye el mantenimiento mensual?",
+    a: "Hospedaje, certificado SSL, monitoreo, actualizaciones de seguridad, y cambios menores de contenido (textos, imágenes, datos de contacto).",
+  },
+  {
+    q: "¿Puedo usar mi propio dominio?",
+    a: "Sí. Si ya tenés un dominio, lo conectamos. Si no, te asesoro para que compres uno y lo dejo funcionando.",
+  },
+  {
+    q: "¿Y si quiero cambiar mucho contenido seguido?",
+    a: "Para eso está el plan con panel administrativo. Editás vos mismo desde una interfaz simple, sin tocar código.",
+  },
+  {
+    q: "¿Hacen rediseños de sitios existentes?",
+    a: "Sí. Si ya tenés un sitio viejo o lento, te lo rehago con la misma propuesta. Solicitalo y lo vemos.",
+  },
+];
+---
+
+<section id="faq" class="py-24 md:py-32 border-t border-[var(--color-border)]/60">
+  <div class="mx-auto max-w-4xl px-6">
+    <div class="text-center mb-12">
+      <p class="text-sm uppercase tracking-widest text-[var(--color-accent)] font-semibold">Preguntas frecuentes</p>
+      <h2 class="mt-3 text-3xl md:text-5xl font-bold tracking-tight">¿Tenés dudas?</h2>
+    </div>
+
+    <div class="space-y-3">
+      {faqs.map((f, i) => (
+        <details class="group rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)]/40 backdrop-blur overflow-hidden">
+          <summary class="flex items-center justify-between cursor-pointer list-none p-6 hover:bg-[var(--color-surface)]/60 transition">
+            <span class="font-semibold tracking-tight">{f.q}</span>
+            <svg class="shrink-0 transition group-open:rotate-45 text-[var(--color-fg-muted)]" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>
+          </summary>
+          <div class="px-6 pb-6 text-[var(--color-fg-muted)] leading-relaxed">
+            {f.a}
+          </div>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>

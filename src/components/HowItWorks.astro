@@ -1,0 +1,63 @@
+---
+const steps = [
+  {
+    n: "01",
+    title: "Solicitás",
+    desc: "Completás un formulario corto con los datos de tu negocio. Te lleva 5 minutos.",
+  },
+  {
+    n: "02",
+    title: "Charlamos",
+    desc: "Te contacto en menos de 24hs para confirmar detalles y cerrar el trabajo.",
+  },
+  {
+    n: "03",
+    title: "Lo construyo",
+    desc: "Una vez confirmado, en menos de 24 horas tu sitio está online y listo para mostrar.",
+    highlight: true,
+  },
+  {
+    n: "04",
+    title: "Mantenimiento simple",
+    desc: "Si algo cambia, lo actualizamos rápido. Sin trámites, sin esperas.",
+  },
+];
+---
+
+<section id="como-funciona" class="py-24 md:py-32 border-t border-[var(--color-border)]/60 relative overflow-hidden">
+  <div class="mx-auto max-w-6xl px-6">
+    <div class="text-center mb-16">
+      <p class="text-sm uppercase tracking-widest text-[var(--color-accent)] font-semibold">Cómo funciona</p>
+      <h2 class="mt-3 text-3xl md:text-5xl font-bold tracking-tight">
+        De la idea al sitio online <span class="text-[var(--color-accent)]">en 24hs</span>
+      </h2>
+      <p class="mt-4 text-[var(--color-fg-muted)] max-w-2xl mx-auto">
+        Un proceso sin vueltas. Pocos pasos, mucho resultado.
+      </p>
+    </div>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+      {steps.map((s) => (
+        <div
+          class:list={[
+            "relative rounded-2xl p-6 border bg-[var(--color-surface)]/40 backdrop-blur transition hover:bg-[var(--color-surface)]",
+            s.highlight ? "border-[var(--color-accent)]/40" : "border-[var(--color-border)]",
+          ]}
+        >
+          <div class:list={[
+            "text-xs font-mono",
+            s.highlight ? "text-[var(--color-accent)]" : "text-[var(--color-fg-subtle)]",
+          ]}>{s.n}</div>
+          <h3 class="mt-3 text-lg font-semibold tracking-tight">{s.title}</h3>
+          <p class="mt-2 text-sm text-[var(--color-fg-muted)] leading-relaxed">{s.desc}</p>
+          {s.highlight && (
+            <div class="mt-4 inline-flex items-center gap-1.5 rounded-full bg-[var(--color-accent)]/10 border border-[var(--color-accent)]/30 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-[var(--color-accent)]">
+              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+              Diferencial
+            </div>
+          )}
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
