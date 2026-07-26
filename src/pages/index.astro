@@ -1,24 +1,16 @@
 ---
 import Base from "../layouts/Base.astro";
-import Nav from "../components/Nav.astro";
 import Hero from "../components/Hero.astro";
-import Plans from "../components/Plans.astro";
-import HowItWorks from "../components/HowItWorks.astro";
-import RecentWork from "../components/RecentWork.astro";
-import Faq from "../components/Faq.astro";
-import CtaFinal from "../components/CtaFinal.astro";
-import Footer from "../components/Footer.astro";
+import About from "../components/About.astro";
+import Projects from "../components/Projects.astro";
+import ArchiveTeaser from "../components/ArchiveTeaser.astro";
+
+const lang = "es" as const;
 ---
 
-<Base>
-  <Nav />
-  <main>
-    <Hero />
-    <Plans />
-    <HowItWorks />
-    <RecentWork />
-    <Faq />
-    <CtaFinal />
-  </main>
-  <Footer />
+<Base lang={lang} route="home">
+  <Hero lang={lang} />
+  <About lang={lang} />
+  <Projects lang={lang} />
+  <ArchiveTeaser lang={lang} />
 </Base>

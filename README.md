@@ -1,55 +1,76 @@
-# Fabri Web
+# fb91
 
-Sitio personal y plataforma para vender sitios web a PyMEs.
+Sitio personal de **Fabricio Bianchi** — Ingeniero en Sistemas de Información.
+Una página de presentación con los proyectos actuales y un archivo de trabajos anteriores.
+
+Bilingüe: español en `/` e inglés en `/en/`.
 
 ## Stack
 
-- [Astro 5](https://astro.build/) — server output
-- [Tailwind CSS v4](https://tailwindcss.com/)
-- React (islands para el wizard)
+- [Astro 5](https://astro.build/) — salida estática, sin JS de framework
+- [Tailwind CSS v4](https://tailwindcss.com/) (vía `@tailwindcss/vite`)
 - TypeScript
-- Deploy: [Vercel](https://vercel.com/) (`@astrojs/vercel`)
-- Email: [Resend](https://resend.com/)
+- Deploy: GitHub Pages (GitHub Actions)
 
 ## Desarrollo
 
 ```bash
 npm install
-cp .env.example .env   # completá las variables
-npm run dev
+npm run dev      # http://localhost:4321
+npm run build    # build de producción
+npm run check    # type-check de los .astro
 ```
-
-## Variables de entorno
-
-| Var | Descripción |
-|---|---|
-| `RESEND_API_KEY` | API key de Resend |
-| `NOTIFICATION_EMAIL` | Email donde llegan las solicitudes |
-| `FROM_EMAIL` | Email "from" (debe estar verificado en Resend o usar `onboarding@resend.dev` para pruebas) |
 
 ## Estructura
 
 ```
 src/
-  layouts/Base.astro            Layout base + meta tags
-  components/                   Componentes de la home
-  components/wizard/            Wizard React multi-step
-  pages/index.astro             Home
-  pages/archivo.astro           Trabajos viejos con lightbox
-  pages/solicitar.astro         Wizard
-  pages/api/solicitud.ts        Endpoint de envío de email
-  lib/                          Tipos, datos y utilidades
-public/archivo/                  Imágenes del archivo histórico
-legacy/                          Código del sitio anterior (referencia)
+  layouts/Base.astro          Layout, <head>, hreflang, header y footer
+  components/
+    Header.astro              Nombre, link al archivo y cambio de idioma
+    Hero.astro                Foto, nombre, rol y redes
+    About.astro               Sobre mí
+    Projects.astro            Proyectos actuales con captura
+    ArchiveTeaser.astro       Bloque que enlaza al archivo
+    ArchiveView.astro         Encabezado de /archivo
+    ArchiveGrid.astro         Grilla filtrable + lightbox (JS vanilla)
+    Section.astro             Sección editorial: etiqueta + contenido
+  i18n/ui.ts                  Textos ES/EN y rutas por idioma
+  lib/profile.ts              Nombre, rol, ubicación y redes
+  lib/projects.ts             Proyectos actuales
+  lib/archive.ts              Trabajos archivados
+  assets/                     Foto de perfil y capturas (optimizadas por Astro)
+  pages/
+    index.astro               Home ES
+    archivo.astro             Archivo ES
+    en/index.astro            Home EN
+    en/archive.astro          Archivo EN
+    404.astro
+public/archivo/               Imágenes del archivo (thumb + large)
 ```
 
-## Deploy a Vercel
+## Editar contenido
 
-1. Conectar repo a Vercel
-2. Framework preset: Astro (auto-detectado)
-3. Cargar variables de entorno (Settings → Environment Variables)
-4. Deploy
+| Qué | Dónde |
+|---|---|
+| Nombre, rol, ubicación, redes | `src/lib/profile.ts` |
+| Proyectos (nombre, link, descripción) | `src/lib/projects.ts` |
+| Textos de la interfaz y "Sobre mí" (ES/EN) | `src/i18n/ui.ts` |
+| Trabajos archivados | `src/lib/archive.ts` |
 
-## Agregar trabajos recientes
+### Agregar un proyecto
 
-Editá `src/lib/works.ts` y agregá las imágenes a `public/works/`.
+1. Guardá la captura en `src/assets/projects/` (ideal 1440×900 @2x).
+2. Agregá la entrada en `src/lib/projects.ts` con su `tagline` en ES y EN.
+
+## Deploy
+
+Se publica en <https://fb91.github.io> con GitHub Actions: cada push a `main` corre
+[`.github/workflows/deploy.yml`](.github/workflows/deploy.yml), que buildea y sube `dist/` a Pages.
+
+Configuración necesaria una sola vez: **Settings → Pages → Source: GitHub Actions**.
+
+## Historia
+
+Antes de 2026 esto era un portfolio freelance en HTML + Bootstrap + jQuery.
+Ese código se eliminó; sus imágenes se conservan en `public/archivo/` y se muestran en `/archivo`.

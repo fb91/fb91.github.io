@@ -1,0 +1,22 @@
+---
+/**
+ * Sección editorial: etiqueta a la izquierda, contenido a la derecha,
+ * separadas por una línea fina arriba.
+ */
+interface Props {
+  label: string;
+  id?: string;
+  class?: string;
+}
+
+const { label, id, class: className } = Astro.props;
+---
+
+<section id={id} class:list={["border-t border-line py-12 sm:py-16", className]}>
+  <div class="grid gap-6 sm:grid-cols-[7.5rem_1fr] sm:gap-10">
+    <h2 class="eyebrow pt-1.5">{label}</h2>
+    <div class="min-w-0">
+      <slot />
+    </div>
+  </div>
+</section>

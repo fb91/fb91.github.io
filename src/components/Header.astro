@@ -1,0 +1,46 @@
+---
+import type { Lang, RouteName } from "../i18n/ui";
+import { useTranslations, otherLang, routes } from "../i18n/ui";
+import { profile } from "../lib/profile";
+
+interface Props {
+  lang: Lang;
+  route: RouteName;
+}
+
+const { lang, route } = Astro.props;
+const t = useTranslations(lang);
+const other = otherLang(lang);
+---
+
+<header class="flex items-center justify-between gap-6 py-7 sm:py-9">
+  <a
+    href={routes.home[lang]}
+    class="font-serif text-xl leading-none tracking-tight transition-colors hover:text-accent"
+    aria-label={profile.name}
+  >
+    {profile.name}
+  </a>
+
+  <nav class="flex items-center gap-5 text-sm sm:gap-7" aria-label={lang === "es" ? "Principal" : "Main"}>
+    <a
+      href={routes.archive[lang]}
+      class:list={[
+        "transition-colors hover:text-accent",
+        route === "archive" ? "text-ink" : "text-muted",
+      ]}
+      aria-current={route === "archive" ? "page" : undefined}
+    >
+      {t("nav.archive")}
+    </a>
+
+    <a
+      href={routes[route][other]}
+      hreflang={other}
+      title={t("nav.langLabel")}
+      class="border border-line px-2.5 py-1 text-[0.7rem] font-medium tracking-[0.12em] text-muted uppercase transition-colors hover:border-ink hover:text-ink"
+    >
+      {other}
+    </a>
+  </nav>
+</header>

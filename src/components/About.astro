@@ -1,0 +1,19 @@
+---
+import type { Lang } from "../i18n/ui";
+import { useTranslations } from "../i18n/ui";
+import Section from "./Section.astro";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+---
+
+<Section label={t("about.label")}>
+  <div class="max-w-[54ch] space-y-5 text-[1.0625rem] leading-relaxed text-ink-2 sm:text-lg">
+    <p>{t("about.body")}</p>
+    <p>{t("about.body2")}</p>
+  </div>
+</Section>

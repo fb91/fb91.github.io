@@ -1,16 +1,11 @@
 import { defineConfig } from 'astro/config';
-import react from '@astrojs/react';
-import vercel from '@astrojs/vercel';
 import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig({
-  output: 'server',
-  adapter: vercel({
-    webAnalytics: { enabled: true },
-  }),
-  integrations: [react()],
+  output: 'static',
   vite: {
     plugins: [tailwindcss()],
   },
-  site: 'https://fb91.vercel.app',
+  // Repo `fb91.github.io` = user site, se sirve en la raíz del dominio.
+  site: 'https://fb91.github.io',
 });

@@ -1,0 +1,16 @@
+---
+import Base from "../../layouts/Base.astro";
+import Hero from "../../components/Hero.astro";
+import About from "../../components/About.astro";
+import Projects from "../../components/Projects.astro";
+import ArchiveTeaser from "../../components/ArchiveTeaser.astro";
+
+const lang = "en" as const;
+---
+
+<Base lang={lang} route="home">
+  <Hero lang={lang} />
+  <About lang={lang} />
+  <Projects lang={lang} />
+  <ArchiveTeaser lang={lang} />
+</Base>

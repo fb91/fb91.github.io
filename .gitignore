@@ -1,7 +1,5 @@
 # build
 dist/
-.output/
-.vercel/
 .astro/
 
 # deps

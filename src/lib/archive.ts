@@ -9,6 +9,10 @@ export type ArchiveItem = {
   featured?: boolean;
 };
 
+/**
+ * Trabajos freelance de una etapa anterior. Las imágenes viven en /public/archivo.
+ * Earlier freelance work. Images live in /public/archivo.
+ */
 export const archiveItems: ArchiveItem[] = [
   { id: "tweety", title: "Salón Tweety", thumb: "/archivo/thumb/tweety.jpg", full: "/archivo/large/salontweety.jpg", categories: ["web", "grafico", "fotografia"], featured: true },
   { id: "athenas", title: "Athenas", thumb: "/archivo/thumb/athenas.jpg", full: "/archivo/large/athenas.png", categories: ["web"], featured: true },
@@ -28,7 +32,6 @@ export const archiveItems: ArchiveItem[] = [
   { id: "ligaSanPatricio", title: "Liga San Patricio", thumb: "/archivo/thumb/ligaSanPatricio.jpg", full: "/archivo/large/ligaSanPatricio.jpg", categories: ["web"] },
   { id: "liliana", title: "Liliana", thumb: "/archivo/thumb/liliana.jpg", full: "/archivo/large/liliana.jpg", categories: ["web"] },
   { id: "loveInLight", title: "Love In Light", thumb: "/archivo/thumb/loveInLight.jpg", full: "/archivo/large/loveInLight.jpg", categories: ["web"] },
-  { id: "opinion", title: "Opinión", thumb: "/archivo/thumb/opinion.jpg", full: "/archivo/large/opinion.jpg", categories: ["web"] },
   { id: "pabloMartinez", title: "Pablo Martínez", thumb: "/archivo/thumb/pabloMartinez.jpg", full: "/archivo/large/pabloMartinez.jpg", categories: ["web", "grafico"], featured: true },
   { id: "padreMisericordioso", title: "Padre Misericordioso", thumb: "/archivo/thumb/padreMisericordioso.jpg", full: "/archivo/large/padreMisericordioso.jpg", categories: ["web", "grafico"], featured: true },
   { id: "fg", title: "TFG", thumb: "/archivo/thumb/fg.jpg", full: "/archivo/large/fg.jpg", categories: ["web"] },
@@ -36,10 +39,6 @@ export const archiveItems: ArchiveItem[] = [
   { id: "wendy", title: "Wendy", thumb: "/archivo/thumb/wendy.jpg", full: "/archivo/large/wendy.jpg", categories: ["web"] },
 ];
 
-export const categoryLabels: Record<ArchiveCategory | "todo" | "destacado", string> = {
-  todo: "Todo",
-  destacado: "Destacado",
-  web: "Desarrollo web",
-  grafico: "Diseño gráfico",
-  fotografia: "Fotografía",
-};
+export const filters = ["todo", "destacado", "web", "grafico", "fotografia"] as const;
+
+export type Filter = (typeof filters)[number];

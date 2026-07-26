@@ -1,0 +1,196 @@
+---
+import type { Lang } from "../i18n/ui";
+import { useTranslations, type UiKey } from "../i18n/ui";
+import { archiveItems, filters } from "../lib/archive";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+---
+
+<div class="mt-10 sm:mt-12">
+  <div
+    class="sticky top-0 z-20 -mx-6 flex flex-wrap gap-x-1 gap-y-2 border-b border-line bg-paper/90 px-6 py-3 backdrop-blur-sm sm:-mx-10 sm:px-10 lg:-mx-14 lg:px-14"
+    role="group"
+    aria-label={t("archive.title")}
+  >
+    {
+      filters.map((filter) => (
+        <button
+          type="button"
+          data-filter={filter}
+          aria-pressed={filter === "todo" ? "true" : "false"}
+          class="rounded-full px-3 py-1.5 text-[0.8125rem] text-muted transition-colors hover:text-ink aria-pressed:bg-ink aria-pressed:text-paper"
+        >
+          {t(`filter.${filter}` as UiKey)}
+        </button>
+      ))
+    }
+  </div>
+
+  <ul
+    id="archive-grid"
+    class="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 lg:grid-cols-4"
+  >
+    {
+      archiveItems.map((item, index) => (
+        <li
+          data-item
+          data-categories={[...item.categories, item.featured ? "destacado" : ""].join(" ")}
+          data-index={index}
+        >
+          <button
+            type="button"
+            data-open={index}
+            class="group block w-full cursor-zoom-in overflow-hidden border border-line bg-paper-2"
+          >
+            <img
+              src={item.thumb}
+              alt={item.title}
+              loading="lazy"
+              decoding="async"
+              width="400"
+              height="400"
+              class="aspect-square w-full object-cover transition duration-500 ease-out group-hover:scale-[1.03]"
+            />
+            <span class="sr-only">{item.title}</span>
+          </button>
+        </li>
+      ))
+    }
+  </ul>
+</div>
+
+<dialog
+  id="lightbox"
+  class="m-auto w-[min(94vw,58rem)] bg-transparent p-0 backdrop:bg-ink/90 backdrop:backdrop-blur-sm"
+  aria-label={t("archive.title")}
+>
+  <div class="flex max-h-[92dvh] flex-col">
+    <div class="flex items-center justify-between gap-4 pb-3 text-paper">
+      <p id="lightbox-title" class="font-serif text-lg"></p>
+
+      <div class="flex items-center gap-1.5">
+        <button
+          type="button"
+          data-nav="-1"
+          aria-label={t("archive.prev")}
+          class="flex h-9 w-9 items-center justify-center rounded-full border border-paper/25 transition-colors hover:bg-paper hover:text-ink"
+        >
+          ←
+        </button>
+        <button
+          type="button"
+          data-nav="1"
+          aria-label={t("archive.next")}
+          class="flex h-9 w-9 items-center justify-center rounded-full border border-paper/25 transition-colors hover:bg-paper hover:text-ink"
+        >
+          →
+        </button>
+        <button
+          type="button"
+          data-close
+          aria-label={t("archive.close")}
+          class="ml-2 flex h-9 w-9 items-center justify-center rounded-full border border-paper/25 transition-colors hover:bg-paper hover:text-ink"
+        >
+          ✕
+        </button>
+      </div>
+    </div>
+
+    <!-- Las piezas del archivo son mockups verticales largos: se scrollean. -->
+    <div id="lightbox-scroll" class="min-h-0 flex-1 overflow-y-auto overscroll-contain bg-paper">
+      <img id="lightbox-img" src="" alt="" class="block w-full" />
+    </div>
+  </div>
+</dialog>
+
+<script>
+  import { archiveItems } from "../lib/archive";
+
+  const grid = document.querySelector<HTMLUListElement>("#archive-grid");
+  const dialog = document.querySelector<HTMLDialogElement>("#lightbox");
+  const image = document.querySelector<HTMLImageElement>("#lightbox-img");
+  const caption = document.querySelector<HTMLParagraphElement>("#lightbox-title");
+
+  if (grid && dialog && image && caption) {
+    const items = Array.from(grid.querySelectorAll<HTMLLIElement>("[data-item]"));
+    let current = 0;
+
+    // --- Filtros ---
+    const filterButtons = document.querySelectorAll<HTMLButtonElement>("[data-filter]");
+
+    const applyFilter = (filter: string) => {
+      items.forEach((item) => {
+        const categories = (item.dataset.categories ?? "").split(" ");
+        item.hidden = !(filter === "todo" || categories.includes(filter));
+      });
+
+      filterButtons.forEach((button) => {
+        button.setAttribute("aria-pressed", String(button.dataset.filter === filter));
+      });
+    };
+
+    filterButtons.forEach((button) => {
+      button.addEventListener("click", () => applyFilter(button.dataset.filter ?? "todo"));
+    });
+
+    // --- Lightbox ---
+    const visibleIndexes = () =>
+      items.filter((item) => !item.hidden).map((item) => Number(item.dataset.index));
+
+    const scroller = document.querySelector<HTMLDivElement>("#lightbox-scroll");
+
+    const show = (index: number) => {
+      const item = archiveItems[index];
+      if (!item) return;
+      current = index;
+      image.src = item.full;
+      image.alt = item.title;
+      caption.textContent = item.title;
+      if (scroller) scroller.scrollTop = 0;
+    };
+
+    const step = (direction: number) => {
+      const pool = visibleIndexes();
+      if (pool.length === 0) return;
+      const at = pool.indexOf(current);
+      const next = pool[(at + direction + pool.length) % pool.length];
+      if (next !== undefined) show(next);
+    };
+
+    grid.querySelectorAll<HTMLButtonElement>("[data-open]").forEach((button) => {
+      button.addEventListener("click", () => {
+        show(Number(button.dataset.open));
+        dialog.showModal();
+      });
+    });
+
+    dialog.querySelectorAll<HTMLButtonElement>("[data-nav]").forEach((button) => {
+      button.addEventListener("click", () => step(Number(button.dataset.nav)));
+    });
+
+    dialog.querySelector<HTMLButtonElement>("[data-close]")?.addEventListener("click", () => {
+      dialog.close();
+    });
+
+    // Clic en el fondo cierra.
+    dialog.addEventListener("click", (event) => {
+      if (event.target === dialog) dialog.close();
+    });
+
+    dialog.addEventListener("keydown", (event) => {
+      if (event.key === "ArrowLeft") {
+        event.preventDefault();
+        step(-1);
+      }
+      if (event.key === "ArrowRight") {
+        event.preventDefault();
+        step(1);
+      }
+    });
+  }
+</script>
