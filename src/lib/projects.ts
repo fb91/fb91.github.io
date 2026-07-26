@@ -25,7 +25,7 @@ export const projects: Project[] = [
       en: "A spiritual life platform: daily gospel, Bible and prayer.",
     },
     image: mana,
-    frame: "#1a140d",
+    frame: "#f6f4ef",
   },
   {
     id: "cajarapida",

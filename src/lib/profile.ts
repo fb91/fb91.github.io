@@ -14,6 +14,11 @@ export const profile = {
     es: "Ingeniero en Sistemas de Información",
     en: "Information Systems Engineer",
   },
+  /** Puesto actual, mención corta bajo el rol. */
+  position: {
+    es: "Ingeniero de Software Sr. full-time",
+    en: "Sr. Software Engineer, full-time",
+  },
 } as const;
 
 export type SocialLink = {

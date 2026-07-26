@@ -11,21 +11,25 @@ interface Props {
 
 const { lang } = Astro.props;
 const t = useTranslations(lang);
-const [firstName, ...rest] = profile.name.split(" ");
-const lastName = rest.join(" ");
 ---
 
 <section class="rise pt-6 pb-16 sm:pt-12 sm:pb-24">
   <div class="flex flex-col-reverse gap-10 sm:flex-row sm:items-center sm:justify-between sm:gap-12">
-    <div class="max-w-xl">
-      <h1 class="font-serif text-[3.25rem] leading-[0.98] tracking-[-0.02em] sm:text-[4.25rem]">
-        {firstName}<br />{lastName}
+    <div class="min-w-0">
+      <!-- El nombre entra siempre en una sola línea: el cuerpo escala con el viewport. -->
+      <h1
+        class="font-serif leading-[1.02] tracking-[-0.02em] whitespace-nowrap"
+        style="font-size: clamp(2.25rem, 9.2vw, 4.25rem)"
+      >
+        {profile.name}
       </h1>
 
       <p class="mt-5 text-lg text-ink-2 sm:text-xl">{profile.role[lang]}</p>
 
-      <p class="mt-2 flex items-center gap-2 text-sm text-muted">
+      <p class="mt-2 flex flex-wrap items-center gap-x-2 gap-y-1 text-sm text-muted">
         <span aria-hidden="true" class="inline-block h-1 w-1 rounded-full bg-accent"></span>
+        {profile.position[lang]}
+        <span aria-hidden="true" class="text-line">/</span>
         {profile.location[lang]}
       </p>
     </div>

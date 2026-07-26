@@ -1,7 +1,6 @@
 ---
 import type { Lang, RouteName } from "../i18n/ui";
 import { useTranslations, otherLang, routes } from "../i18n/ui";
-import { profile } from "../lib/profile";
 
 interface Props {
   lang: Lang;
@@ -13,16 +12,19 @@ const t = useTranslations(lang);
 const other = otherLang(lang);
 ---
 
-<header class="flex items-center justify-between gap-6 py-7 sm:py-9">
-  <a
-    href={routes.home[lang]}
-    class="font-serif text-xl leading-none tracking-tight transition-colors hover:text-accent"
-    aria-label={profile.name}
-  >
-    {profile.name}
-  </a>
-
+<header class="flex items-center justify-end gap-6 py-7 sm:py-9">
   <nav class="flex items-center gap-5 text-sm sm:gap-7" aria-label={lang === "es" ? "Principal" : "Main"}>
+    <a
+      href={routes.home[lang]}
+      class:list={[
+        "transition-colors hover:text-accent",
+        route === "home" ? "text-ink" : "text-muted",
+      ]}
+      aria-current={route === "home" ? "page" : undefined}
+    >
+      {t("nav.home")}
+    </a>
+
     <a
       href={routes.archive[lang]}
       class:list={[

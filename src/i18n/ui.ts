@@ -16,6 +16,7 @@ export const ui = {
     "meta.archiveDescription":
       "Archivo de trabajos freelance de diseño web, gráfico y fotografía.",
 
+    "nav.home": "Inicio",
     "nav.archive": "Archivo",
     "nav.langLabel": "Cambiar idioma",
 
@@ -62,6 +63,7 @@ export const ui = {
     "meta.archiveDescription":
       "Archive of freelance web design, graphic design and photography work.",
 
+    "nav.home": "Home",
     "nav.archive": "Archive",
     "nav.langLabel": "Switch language",
 
