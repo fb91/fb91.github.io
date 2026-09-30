@@ -1,16 +1,190 @@
 ---
+import { Image } from "astro:assets";
 import Base from "../layouts/Base.astro";
-import Hero from "../components/Hero.astro";
-import About from "../components/About.astro";
-import Projects from "../components/Projects.astro";
-import ArchiveTeaser from "../components/ArchiveTeaser.astro";
+import { profile } from "../lib/profile";
+import { projects } from "../lib/projects";
+import { archiveItems } from "../lib/archive";
 
-const lang = "es" as const;
+// Todas las tarjetas comparten el mismo marco.
+const box = "aspect-[4/3] w-full overflow-hidden border border-line bg-paper-2";
 ---
 
-<Base lang={lang} route="home">
-  <Hero lang={lang} />
-  <About lang={lang} />
-  <Projects lang={lang} />
-  <ArchiveTeaser lang={lang} />
+<Base>
+  <header class="rise pt-14 pb-12 sm:pt-20 sm:pb-16">
+    <h1 class="font-serif text-[2.75rem] leading-none tracking-[-0.02em] sm:text-[3.75rem]">
+      {profile.name}
+    </h1>
+    <p class="mt-4 text-[1.0625rem] text-muted">Proyectos y cosas que fui haciendo.</p>
+  </header>
+
+  <ul class="grid grid-cols-2 gap-x-4 gap-y-8 sm:gap-x-6 sm:gap-y-10 lg:grid-cols-3">
+    {
+      projects.map((project) => (
+        <li>
+          {project.image ? (
+            <a href={project.url} target="_blank" rel="noopener noreferrer" class="group block" tabindex="-1" aria-hidden="true">
+              <div class={box} style={project.frame ? `background-color:${project.frame}` : undefined}>
+                <Image
+                  src={project.image}
+                  alt=""
+                  widths={[400, 640, 960]}
+                  sizes="(min-width: 1024px) 18rem, (min-width: 640px) 45vw, 45vw"
+                  loading="lazy"
+                  class="h-full w-full object-cover object-top transition duration-500 ease-out group-hover:scale-[1.03]"
+                />
+              </div>
+            </a>
+          ) : (
+            <div class:list={[box, "flex items-center justify-center p-4 text-center"]}>
+              <span class="font-serif text-xl leading-tight text-ink-2 sm:text-2xl">{project.name}</span>
+            </div>
+          )}
+
+          <h2 class="mt-3 text-[0.975rem] font-medium">{project.name}</h2>
+          <p class="mt-1 text-sm leading-relaxed text-ink-2">{project.note}</p>
+
+          {project.url && (
+            <a
+              href={project.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="link-underline mt-2 inline-flex items-baseline gap-1 text-sm text-muted"
+            >
+              {project.urlLabel ?? project.url}
+              <span aria-hidden="true" class="text-xs">↗</span>
+            </a>
+          )}
+
+          {project.links?.map((link) => (
+            <a href={link.url} class="link-underline mt-2 inline-block text-sm text-muted">
+              {link.label}
+            </a>
+          ))}
+        </li>
+      ))
+    }
+
+    {
+      archiveItems.map((item, index) => (
+        <li>
+          <button type="button" data-open={index} class="group block w-full cursor-zoom-in text-left">
+            <div class={box}>
+              <img
+                src={item.thumb}
+                alt=""
+                loading="lazy"
+                decoding="async"
+                width="400"
+                height="400"
+                class="h-full w-full object-cover transition duration-500 ease-out group-hover:scale-[1.03]"
+              />
+            </div>
+            <h2 class="mt-3 text-[0.975rem] font-medium">{item.title}</h2>
+          </button>
+        </li>
+      ))
+    }
+  </ul>
+
+  <dialog
+    id="lightbox"
+    class="m-auto w-[min(94vw,58rem)] bg-transparent p-0 backdrop:bg-ink/90 backdrop:backdrop-blur-sm"
+    aria-labelledby="lightbox-title"
+  >
+    <div class="flex max-h-[92dvh] flex-col">
+      <div class="flex items-center justify-between gap-4 pb-3 text-paper">
+        <p id="lightbox-title" class="font-serif text-lg"></p>
+
+        <div class="flex items-center gap-1.5">
+          <button
+            type="button"
+            data-nav="-1"
+            aria-label="Anterior"
+            class="flex h-9 w-9 items-center justify-center rounded-full border border-paper/25 transition-colors hover:bg-paper hover:text-ink"
+          >
+            ←
+          </button>
+          <button
+            type="button"
+            data-nav="1"
+            aria-label="Siguiente"
+            class="flex h-9 w-9 items-center justify-center rounded-full border border-paper/25 transition-colors hover:bg-paper hover:text-ink"
+          >
+            →
+          </button>
+          <button
+            type="button"
+            data-close
+            aria-label="Cerrar"
+            class="ml-2 flex h-9 w-9 items-center justify-center rounded-full border border-paper/25 transition-colors hover:bg-paper hover:text-ink"
+          >
+            ✕
+          </button>
+        </div>
+      </div>
+
+      <!-- Las piezas del archivo son mockups verticales largos: se scrollean. -->
+      <div id="lightbox-scroll" class="min-h-0 flex-1 overflow-y-auto overscroll-contain bg-paper">
+        <img id="lightbox-img" src="" alt="" class="block w-full" />
+      </div>
+    </div>
+  </dialog>
 </Base>
+
+<script>
+  import { archiveItems } from "../lib/archive";
+
+  const dialog = document.querySelector<HTMLDialogElement>("#lightbox");
+  const image = document.querySelector<HTMLImageElement>("#lightbox-img");
+  const caption = document.querySelector<HTMLParagraphElement>("#lightbox-title");
+  const scroller = document.querySelector<HTMLDivElement>("#lightbox-scroll");
+
+  if (dialog && image && caption) {
+    let current = 0;
+
+    const show = (index: number) => {
+      const item = archiveItems[index];
+      if (!item) return;
+      current = index;
+      image.src = item.full;
+      image.alt = item.title;
+      caption.textContent = item.title;
+      if (scroller) scroller.scrollTop = 0;
+    };
+
+    const step = (direction: number) => {
+      show((current + direction + archiveItems.length) % archiveItems.length);
+    };
+
+    document.querySelectorAll<HTMLButtonElement>("[data-open]").forEach((button) => {
+      button.addEventListener("click", () => {
+        show(Number(button.dataset.open));
+        dialog.showModal();
+      });
+    });
+
+    dialog.querySelectorAll<HTMLButtonElement>("[data-nav]").forEach((button) => {
+      button.addEventListener("click", () => step(Number(button.dataset.nav)));
+    });
+
+    dialog.querySelector<HTMLButtonElement>("[data-close]")?.addEventListener("click", () => {
+      dialog.close();
+    });
+
+    // Clic en el fondo cierra.
+    dialog.addEventListener("click", (event) => {
+      if (event.target === dialog) dialog.close();
+    });
+
+    dialog.addEventListener("keydown", (event) => {
+      if (event.key === "ArrowLeft") {
+        event.preventDefault();
+        step(-1);
+      }
+      if (event.key === "ArrowRight") {
+        event.preventDefault();
+        step(1);
+      }
+    });
+  }
+</script>

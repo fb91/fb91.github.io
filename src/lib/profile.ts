@@ -1,46 +1,30 @@
 /**
  * Datos personales del sitio. Editá acá y se actualiza todo.
- * Personal data for the whole site. Edit here and everything updates.
  */
 
 export const profile = {
   name: "Fabricio Bianchi",
-  initials: "FB",
-  location: {
-    es: "Rosario, Argentina",
-    en: "Rosario, Argentina",
-  },
-  role: {
-    es: "Ingeniero en Sistemas de Información",
-    en: "Information Systems Engineer",
-  },
-  /** Puesto actual, mención corta bajo el rol. */
-  position: {
-    es: "Ingeniero de Software Sr. full-time",
-    en: "Sr. Software Engineer, full-time",
-  },
+  /**
+   * Email de contacto que se muestra en las políticas de privacidad.
+   * COMPLETAR ANTES DE PUBLICAR: mientras esté vacío, `npm run build` falla a propósito
+   * para que la política nunca se publique sin un medio de contacto real.
+   */
+  contactEmail: "",
 } as const;
 
 export type SocialLink = {
   label: string;
-  handle: string;
   url: string;
 };
 
 export const socials: SocialLink[] = [
-  {
-    label: "LinkedIn",
-    handle: "/in/fabricio-bianchi",
-    url: "https://www.linkedin.com/in/fabricio-bianchi/",
-  },
-  {
-    label: "GitHub",
-    handle: "@fb91",
-    url: "https://github.com/fb91",
-  },
-  {
-    label: "Instagram",
-    handle: "@fabri.b91",
-    url: "https://www.instagram.com/fabri.b91",
-  },
+  { label: "LinkedIn", url: "https://www.linkedin.com/in/fabricio-bianchi/" },
+  { label: "GitHub", url: "https://github.com/fb91" },
+  { label: "Instagram", url: "https://www.instagram.com/fabri.b91" },
 ];
+
+/** Rutas fijas del sitio. Las URLs de las políticas no deben cambiar una vez publicadas. */
+export const routes = {
+  home: "/",
+  recuerdosPrivacy: "/chatgpt/recuerdos-para-imprimir/privacidad/",
+} as const;

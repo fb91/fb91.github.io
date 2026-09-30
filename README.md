@@ -1,9 +1,8 @@
 # fb91
 
 Sitio personal de **Fabricio Bianchi** — Ingeniero en Sistemas de Información.
-Una página de presentación con los proyectos actuales y un archivo de trabajos anteriores.
-
-Bilingüe: español en `/` e inglés en `/en/`.
+Una sola página: un cajón de proyectos y cosas que fui haciendo.
+Aparte, las políticas de privacidad de los complementos para ChatGPT.
 
 ## Stack
 
@@ -25,43 +24,35 @@ npm run check    # type-check de los .astro
 
 ```
 src/
-  layouts/Base.astro          Layout, <head>, hreflang, header y footer
-  components/
-    Header.astro              Nombre, link al archivo y cambio de idioma
-    Hero.astro                Foto, nombre, rol y redes
-    About.astro               Sobre mí
-    Projects.astro            Proyectos actuales con captura
-    ArchiveTeaser.astro       Bloque que enlaza al archivo
-    ArchiveView.astro         Encabezado de /archivo
-    ArchiveGrid.astro         Grilla filtrable + lightbox (JS vanilla)
-    Section.astro             Sección editorial: etiqueta + contenido
-  i18n/ui.ts                  Textos ES/EN y rutas por idioma
-  lib/profile.ts              Nombre, rol, ubicación y redes
-  lib/projects.ts             Proyectos actuales
-  lib/archive.ts              Trabajos archivados
-  assets/                     Foto de perfil y capturas (optimizadas por Astro)
+  layouts/Base.astro          Layout y <head> de la página principal
+  components/Footer.astro     Pie con redes
+  lib/profile.ts              Nombre, email de contacto, redes y rutas fijas
+  lib/projects.ts             Proyectos (con o sin captura)
+  lib/archive.ts              Trabajos freelance anteriores (lightbox)
+  assets/projects/            Capturas (optimizadas por Astro)
   pages/
-    index.astro               Home ES
-    archivo.astro             Archivo ES
-    en/index.astro            Home EN
-    en/archive.astro          Archivo EN
+    index.astro               La página única
+    chatgpt/recuerdos-para-imprimir/privacidad.astro
+                              Política de privacidad (autónoma, sin JS)
     404.astro
 public/archivo/               Imágenes del archivo (thumb + large)
 ```
+
+Las URLs viejas (`/archivo/`, `/en/`, `/en/archive/`) redirigen a `/`.
 
 ## Editar contenido
 
 | Qué | Dónde |
 |---|---|
-| Nombre, rol, ubicación, redes | `src/lib/profile.ts` |
-| Proyectos (nombre, link, descripción) | `src/lib/projects.ts` |
-| Textos de la interfaz y "Sobre mí" (ES/EN) | `src/i18n/ui.ts` |
-| Trabajos archivados | `src/lib/archive.ts` |
+| Proyectos | `src/lib/projects.ts` |
+| Trabajos anteriores | `src/lib/archive.ts` |
+| Redes y email de contacto | `src/lib/profile.ts` |
 
-### Agregar un proyecto
+### Email de contacto (obligatorio)
 
-1. Guardá la captura en `src/assets/projects/` (ideal 1440×900 @2x).
-2. Agregá la entrada en `src/lib/projects.ts` con su `tagline` en ES y EN.
+`contactEmail` en `src/lib/profile.ts` se muestra en la política de privacidad.
+Mientras esté vacío, `npm run build` falla a propósito: así la política nunca se
+publica sin un contacto real.
 
 ## Deploy
 
@@ -73,4 +64,4 @@ Configuración necesaria una sola vez: **Settings → Pages → Source: GitHub A
 ## Historia
 
 Antes de 2026 esto era un portfolio freelance en HTML + Bootstrap + jQuery.
-Ese código se eliminó; sus imágenes se conservan en `public/archivo/` y se muestran en `/archivo`.
+Ese código se eliminó; sus imágenes se conservan en `public/archivo/` y se muestran en la página principal.

@@ -1,0 +1,224 @@
+---
+/**
+ * Política de privacidad del complemento de ChatGPT "Recuerdos para imprimir".
+ * Es la Privacy Policy URL declarada en el directorio de ChatGPT: la ruta no debe cambiar.
+ *
+ * Página autónoma a propósito: sin JS, sin fuentes externas, sin cookies ni analytics.
+ */
+import { profile, routes } from "../../../lib/profile";
+
+const email = profile.contactEmail.trim();
+if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+  throw new Error(
+    "Falta el email de contacto de la política de privacidad: completá `contactEmail` en src/lib/profile.ts.",
+  );
+}
+
+const title = "Política de Privacidad — Recuerdos para imprimir";
+const description =
+  "Política de privacidad del complemento de ChatGPT «Recuerdos para imprimir», desarrollado por Fabricio Bianchi: qué información usa, para qué y qué no hace con ella.";
+const updated = { iso: "2026-09-30", label: "30 de septiembre de 2026" };
+const canonical = new URL(routes.recuerdosPrivacy, Astro.site);
+
+const openai = {
+  privacy: "https://openai.com/policies/privacy-policy/",
+  terms: "https://openai.com/policies/terms-of-use/",
+};
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="author" content={profile.name} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:locale" content="es_AR" />
+    <style is:inline>
+      :root {
+        color-scheme: light;
+        --bg: #fafaf9;
+        --text: #1c1b19;
+        --soft: #44423d;
+        --muted: #6b6861;
+        --line: #e4e1db;
+        --link: #1d4ed8;
+      }
+      * { box-sizing: border-box; }
+      html { -webkit-text-size-adjust: 100%; }
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--text);
+        font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        font-size: 1.0625rem;
+        line-height: 1.65;
+      }
+      .wrap { max-width: 42rem; margin: 0 auto; padding: 2rem 1.25rem 4rem; }
+      header { border-bottom: 1px solid var(--line); padding-bottom: 1.5rem; margin-bottom: 2rem; }
+      .kicker { margin: 0 0 0.75rem; font-size: 0.875rem; color: var(--muted); }
+      h1 { margin: 0; font-size: 1.75rem; line-height: 1.25; letter-spacing: -0.01em; }
+      .meta { margin: 0.75rem 0 0; font-size: 0.9375rem; color: var(--muted); }
+      h2 { margin: 2.25rem 0 0.5rem; font-size: 1.1875rem; line-height: 1.35; }
+      p, ul { margin: 0 0 1rem; color: var(--soft); }
+      ul { padding-left: 1.25rem; }
+      li { margin-bottom: 0.35rem; }
+      strong { color: var(--text); font-weight: 600; }
+      a { color: var(--link); text-underline-offset: 2px; }
+      a:focus-visible { outline: 2px solid var(--link); outline-offset: 2px; border-radius: 2px; }
+      footer { margin-top: 3rem; padding-top: 1.25rem; border-top: 1px solid var(--line); font-size: 0.875rem; color: var(--muted); }
+      @media (min-width: 40rem) {
+        .wrap { padding: 3.5rem 2rem 5rem; }
+        h1 { font-size: 2.125rem; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <header>
+        <p class="kicker">Complemento para ChatGPT</p>
+        <h1>Política de Privacidad — Recuerdos para imprimir</h1>
+        <p class="meta">
+          Desarrollador: {profile.name}<br />
+          Última actualización: <time datetime={updated.iso}>{updated.label}</time>
+        </p>
+      </header>
+
+      <main>
+        <section aria-labelledby="que-es">
+          <h2 id="que-es">1. Qué es «Recuerdos para imprimir»</h2>
+          <p>
+            «Recuerdos para imprimir» es un complemento para ChatGPT desarrollado por {profile.name}.
+            Permite subir fotografías y generar con ellas composiciones visuales en formato A4,
+            pensadas principalmente para imprimir en una impresora hogareña.
+          </p>
+          <p>
+            Esta política explica qué información usa el complemento, para qué la usa y qué no hace
+            con ella. Se refiere únicamente al funcionamiento propio del complemento; el uso de
+            ChatGPT en general se rige por las políticas de OpenAI (ver secciones 6 y 7).
+          </p>
+        </section>
+
+        <section aria-labelledby="que-informacion">
+          <h2 id="que-informacion">2. Qué información utiliza</h2>
+          <p>El complemento utiliza la información que el usuario decide proporcionarle dentro de ChatGPT:</p>
+          <ul>
+            <li><strong>Las fotografías</strong> que el usuario sube para armar la composición.</li>
+            <li>
+              <strong>Las instrucciones</strong> que el usuario da sobre cómo quiere la composición
+              (por ejemplo, cantidad de fotos, disposición o textos a incluir).
+            </li>
+          </ul>
+          <p>El complemento no requiere crear una cuenta propia ni tiene un inicio de sesión externo. No solicita:</p>
+          <ul>
+            <li>nombre de usuario ni contraseñas;</li>
+            <li>información bancaria ni datos de pago;</li>
+            <li>otros datos personales que no sean los que el usuario incluya voluntariamente en sus fotos o instrucciones.</li>
+          </ul>
+          <p>
+            Las fotografías pueden contener información personal, como el rostro de las personas que
+            aparecen en ellas. Recomendamos subir solo fotos que el usuario tenga derecho a usar y, si
+            aparecen otras personas, contar con su conformidad. También recomendamos no incluir en las
+            fotos ni en las instrucciones información sensible que no sea necesaria para la composición.
+          </p>
+        </section>
+
+        <section aria-labelledby="para-que">
+          <h2 id="para-que">3. Para qué se utiliza</h2>
+          <p>
+            La información se utiliza <strong>exclusivamente</strong> para responder a la solicitud del
+            usuario y generar la composición A4 que pidió. No se usa para ningún otro fin: no se usa
+            para publicidad, ni para crear perfiles, ni para otros proyectos.
+          </p>
+        </section>
+
+        <section aria-labelledby="almacenamiento">
+          <h2 id="almacenamiento">4. Almacenamiento</h2>
+          <p>
+            El complemento <strong>no tiene una base de datos propia</strong> donde guardar fotografías
+            ni información personal de los usuarios. Las imágenes se procesan únicamente para realizar
+            la tarea pedida.
+          </p>
+          <p>
+            La composición resultante se entrega dentro de la conversación de ChatGPT. Lo que ocurra
+            después con esa conversación, las fotos subidas y los archivos generados (por ejemplo,
+            cuánto tiempo se conservan) depende de ChatGPT y de la configuración de la cuenta del
+            usuario, no del complemento (ver sección 7).
+          </p>
+        </section>
+
+        <section aria-labelledby="no-hace">
+          <h2 id="no-hace">5. Qué no hace el desarrollador con la información</h2>
+          <ul>
+            <li>No vende información de los usuarios.</li>
+            <li>No utiliza las fotografías ni las instrucciones para publicidad.</li>
+            <li>No comparte intencionalmente la información recibida con terceros para fines comerciales.</li>
+            <li>
+              El complemento no utiliza actualmente herramientas propias de analítica, cookies
+              publicitarias ni sistemas de seguimiento (tracking).
+            </li>
+          </ul>
+          <p>Esta página tampoco utiliza cookies, analítica ni seguimiento.</p>
+        </section>
+
+        <section aria-labelledby="chatgpt-openai">
+          <h2 id="chatgpt-openai">6. El complemento funciona dentro de ChatGPT</h2>
+          <p>
+            «Recuerdos para imprimir» se usa dentro de ChatGPT, un servicio de OpenAI. Para poder
+            usar el complemento, las fotografías y las instrucciones se envían a través de ChatGPT, y
+            el uso de ChatGPT está sujeto a las condiciones y políticas de OpenAI, que el usuario
+            acepta con OpenAI de forma independiente de esta política:
+          </p>
+          <ul>
+            <li><a href={openai.privacy} rel="noopener">Política de privacidad de OpenAI</a></li>
+            <li><a href={openai.terms} rel="noopener">Términos de uso de OpenAI</a></li>
+          </ul>
+        </section>
+
+        <section aria-labelledby="no-controla">
+          <h2 id="no-controla">7. Lo que el desarrollador no controla</h2>
+          <p>
+            El desarrollador de «Recuerdos para imprimir» <strong>no controla</strong> cómo ChatGPT u
+            OpenAI almacenan, procesan, conservan o utilizan la información que circula por su
+            plataforma, incluidas las fotos subidas, las conversaciones y los archivos generados. Esas
+            prácticas las define OpenAI en sus propias políticas, y cualquier consulta o solicitud
+            sobre ellas (por ejemplo, para borrar el historial de conversaciones) debe hacerse
+            mediante las herramientas y canales que ofrece OpenAI.
+          </p>
+          <p>
+            Por ese motivo, esta política no hace ninguna afirmación ni garantía sobre el tratamiento
+            de datos que realice ChatGPT u OpenAI.
+          </p>
+        </section>
+
+        <section aria-labelledby="cambios">
+          <h2 id="cambios">8. Cambios en esta política</h2>
+          <p>
+            Esta política puede actualizarse si en el futuro cambian las funcionalidades del
+            complemento o la forma en que utiliza la información. Cuando eso ocurra, se publicará la
+            nueva versión en esta misma dirección y se modificará la fecha de «Última actualización».
+          </p>
+        </section>
+
+        <section aria-labelledby="contacto">
+          <h2 id="contacto">9. Contacto</h2>
+          <p>
+            Para consultas sobre esta política o sobre el funcionamiento del complemento, se puede
+            escribir a {profile.name} a <a href={`mailto:${email}`}>{email}</a>.
+          </p>
+        </section>
+      </main>
+
+      <footer>
+        <a href={routes.home}>{profile.name}</a>
+      </footer>
+    </div>
+  </body>
+</html>
