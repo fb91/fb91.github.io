@@ -8,4 +8,10 @@ export default defineConfig({
   },
   // Repo `fb91.github.io` = user site, se sirve en la raíz del dominio.
   site: 'https://fb91.github.io',
+  // Ex secciones: el sitio ahora es una sola página.
+  redirects: {
+    '/archivo': '/',
+    '/en': '/',
+    '/en/archive': '/',
+  },
 });

@@ -1,46 +1,37 @@
 ---
 import "../styles/global.css";
-import type { Lang } from "../i18n/ui";
-import { useTranslations, otherLang, routes, type RouteName } from "../i18n/ui";
-import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
+import { profile } from "../lib/profile";
 
 interface Props {
-  lang: Lang;
-  route: RouteName;
   title?: string;
   description?: string;
 }
 
-const { lang, route, title, description } = Astro.props;
-const t = useTranslations(lang);
-
-const pageTitle = title ?? t("meta.title");
-const pageDescription = description ?? t("meta.description");
-const canonical = new URL(routes[route][lang], Astro.site);
-const alternate = new URL(routes[route][otherLang(lang)], Astro.site);
+const {
+  title = profile.name,
+  description = "Proyectos y cosas que fue haciendo Fabricio Bianchi.",
+} = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site);
 ---
 
 <!doctype html>
-<html lang={lang}>
+<html lang="es">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
 
-    <title>{pageTitle}</title>
-    <meta name="description" content={pageDescription} />
+    <title>{title}</title>
+    <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
-    <link rel="alternate" hreflang={lang} href={canonical} />
-    <link rel="alternate" hreflang={otherLang(lang)} href={alternate} />
-    <link rel="alternate" hreflang="x-default" href={new URL(routes[route].es, Astro.site)} />
-    <meta name="author" content="Fabricio Bianchi" />
+    <meta name="author" content={profile.name} />
 
     <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="Fabricio Bianchi" />
-    <meta property="og:locale" content={lang === "es" ? "es_AR" : "en_US"} />
-    <meta property="og:title" content={pageTitle} />
-    <meta property="og:description" content={pageDescription} />
+    <meta property="og:site_name" content={profile.name} />
+    <meta property="og:locale" content="es_AR" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
     <meta name="twitter:card" content="summary" />
 
@@ -57,15 +48,14 @@ const alternate = new URL(routes[route][otherLang(lang)], Astro.site);
       href="#main"
       class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:bg-ink focus:px-4 focus:py-2 focus:text-paper"
     >
-      {lang === "es" ? "Ir al contenido" : "Skip to content"}
+      Ir al contenido
     </a>
 
     <div class="mx-auto flex min-h-dvh w-full max-w-[64rem] flex-col px-6 sm:px-10 lg:px-14">
-      <Header lang={lang} route={route} />
       <main id="main" class="flex-1">
         <slot />
       </main>
-      <Footer lang={lang} />
+      <Footer />
     </div>
   </body>
 </html>
