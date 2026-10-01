@@ -25,6 +25,7 @@ npm run check    # type-check de los .astro
 ```
 src/
   layouts/Base.astro          Layout y <head> de la página principal
+  layouts/Policy.astro        Layout de las políticas (autónomo, sin JS) + sección de contacto
   components/Footer.astro     Pie con redes
   lib/profile.ts              Nombre, email de contacto, redes y rutas fijas
   lib/projects.ts             Proyectos (con o sin captura)
@@ -33,7 +34,8 @@ src/
   pages/
     index.astro               La página única
     chatgpt/recuerdos-para-imprimir/privacidad.astro
-                              Política de privacidad (autónoma, sin JS)
+    chatgpt/actividades-para-ninos/privacidad.astro
+                              Políticas de privacidad de los complementos
     404.astro
 public/archivo/               Imágenes del archivo (thumb + large)
 ```

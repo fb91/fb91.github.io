@@ -26,4 +26,5 @@ export const socials: SocialLink[] = [
 export const routes = {
   home: "/",
   recuerdosPrivacy: "/chatgpt/recuerdos-para-imprimir/privacidad/",
+  actividadesPrivacy: "/chatgpt/actividades-para-ninos/privacidad/",
 } as const;
