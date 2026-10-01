@@ -6,10 +6,9 @@ export const profile = {
   name: "Fabricio Bianchi",
   /**
    * Email de contacto que se muestra en las políticas de privacidad.
-   * COMPLETAR ANTES DE PUBLICAR: mientras esté vacío, `npm run build` falla a propósito
-   * para que la política nunca se publique sin un medio de contacto real.
+   * Si queda vacío, `npm run build` falla a propósito: la política nunca se publica sin contacto.
    */
-  contactEmail: "",
+  contactEmail: "fabriciob91@gmail.com",
 } as const;
 
 export type SocialLink = {
