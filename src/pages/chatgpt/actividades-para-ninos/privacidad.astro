@@ -1,0 +1,142 @@
+---
+import Policy from "../../../layouts/Policy.astro";
+
+const openai = {
+  privacy: "https://openai.com/policies/privacy-policy/",
+  terms: "https://openai.com/policies/terms-of-use/",
+};
+---
+
+<Policy
+  product="Actividades para niños"
+  description="Política de privacidad del complemento de ChatGPT «Actividades para niños», desarrollado por Fabricio Bianchi: qué información usa, para qué y qué no hace con ella."
+  updated={{ iso: "2026-10-01", label: "1 de octubre de 2026" }}
+  contactSection={10}
+>
+  <section aria-labelledby="que-es">
+    <h2 id="que-es">1. Qué es «Actividades para niños»</h2>
+    <p>
+      «Actividades para niños» es un complemento para ChatGPT desarrollado por Fabricio Bianchi.
+      Le da a ChatGPT instrucciones para generar imágenes pensadas para chicos: dibujos para
+      colorear, figuras para recortar y otras actividades para jugar, listas para imprimir.
+    </p>
+    <p>
+      Las imágenes las genera ChatGPT siguiendo esas instrucciones. Esta política explica qué
+      información usa el complemento, para qué la usa y qué no hace con ella. Se refiere únicamente
+      al funcionamiento propio del complemento; el uso de ChatGPT en general se rige por las
+      políticas de OpenAI (ver secciones 7 y 8).
+    </p>
+  </section>
+
+  <section aria-labelledby="que-informacion">
+    <h2 id="que-informacion">2. Qué información utiliza</h2>
+    <p>
+      El complemento utiliza únicamente <strong>los pedidos</strong> que el usuario escribe dentro
+      de ChatGPT para describir la actividad que quiere (por ejemplo, el tema, el tipo de actividad
+      o la edad aproximada de los chicos).
+    </p>
+    <p>
+      Para funcionar no necesita fotografías ni datos personales. No requiere crear una cuenta
+      propia ni tiene un inicio de sesión externo, y no solicita:
+    </p>
+    <ul>
+      <li>nombre de usuario ni contraseñas;</li>
+      <li>información bancaria ni datos de pago;</li>
+      <li>datos personales del usuario ni de los chicos.</li>
+    </ul>
+    <p>
+      Recomendamos no incluir en los pedidos información que identifique a un chico, como su
+      nombre completo, su escuela, su domicilio o fotos suyas, porque no hace falta para generar la
+      actividad.
+    </p>
+  </section>
+
+  <section aria-labelledby="para-que">
+    <h2 id="para-que">3. Para qué se utiliza</h2>
+    <p>
+      Los pedidos se utilizan <strong>exclusivamente</strong> para generar la actividad que el
+      usuario solicitó. No se usan para ningún otro fin: no se usan para publicidad, ni para crear
+      perfiles, ni para otros proyectos.
+    </p>
+  </section>
+
+  <section aria-labelledby="almacenamiento">
+    <h2 id="almacenamiento">4. Almacenamiento</h2>
+    <p>
+      El complemento <strong>no tiene una base de datos propia</strong> donde guardar los pedidos,
+      las imágenes generadas ni información personal de los usuarios.
+    </p>
+    <p>
+      Las imágenes se entregan dentro de la conversación de ChatGPT. Lo que ocurra después con esa
+      conversación y con los archivos generados (por ejemplo, cuánto tiempo se conservan) depende
+      de ChatGPT y de la configuración de la cuenta del usuario, no del complemento (ver
+      sección 8).
+    </p>
+  </section>
+
+  <section aria-labelledby="chicos">
+    <h2 id="chicos">5. Sobre los chicos</h2>
+    <p>
+      El complemento está pensado para que lo use una persona adulta (por ejemplo, una madre, un
+      padre o un docente) para preparar actividades para chicos. Los chicos son destinatarios de
+      las actividades impresas, no usuarios del complemento.
+    </p>
+    <p>
+      El uso de ChatGPT está sujeto a los requisitos de edad que establece OpenAI en sus términos.
+      Recomendamos que una persona adulta revise las imágenes antes de dárselas a los chicos.
+    </p>
+  </section>
+
+  <section aria-labelledby="no-hace">
+    <h2 id="no-hace">6. Qué no hace el desarrollador con la información</h2>
+    <ul>
+      <li>No vende información de los usuarios.</li>
+      <li>No utiliza los pedidos ni las imágenes generadas para publicidad.</li>
+      <li>No comparte intencionalmente la información recibida con terceros para fines comerciales.</li>
+      <li>
+        El complemento no utiliza actualmente herramientas propias de analítica, cookies
+        publicitarias ni sistemas de seguimiento (tracking).
+      </li>
+    </ul>
+    <p>Esta página tampoco utiliza cookies, analítica ni seguimiento.</p>
+  </section>
+
+  <section aria-labelledby="chatgpt-openai">
+    <h2 id="chatgpt-openai">7. El complemento funciona dentro de ChatGPT</h2>
+    <p>
+      «Actividades para niños» se usa dentro de ChatGPT, un servicio de OpenAI. Los pedidos se
+      envían a través de ChatGPT, y es ChatGPT el que genera las imágenes. El uso de ChatGPT está
+      sujeto a las condiciones y políticas de OpenAI, que el usuario acepta con OpenAI de forma
+      independiente de esta política:
+    </p>
+    <ul>
+      <li><a href={openai.privacy} rel="noopener">Política de privacidad de OpenAI</a></li>
+      <li><a href={openai.terms} rel="noopener">Términos de uso de OpenAI</a></li>
+    </ul>
+  </section>
+
+  <section aria-labelledby="no-controla">
+    <h2 id="no-controla">8. Lo que el desarrollador no controla</h2>
+    <p>
+      El desarrollador de «Actividades para niños» <strong>no controla</strong> cómo ChatGPT u
+      OpenAI almacenan, procesan, conservan o utilizan la información que circula por su
+      plataforma, incluidas las conversaciones y las imágenes generadas. Esas prácticas las define
+      OpenAI en sus propias políticas, y cualquier consulta o solicitud sobre ellas (por ejemplo,
+      para borrar el historial de conversaciones) debe hacerse mediante las herramientas y canales
+      que ofrece OpenAI.
+    </p>
+    <p>
+      Por ese motivo, esta política no hace ninguna afirmación ni garantía sobre el tratamiento de
+      datos que realice ChatGPT u OpenAI.
+    </p>
+  </section>
+
+  <section aria-labelledby="cambios">
+    <h2 id="cambios">9. Cambios en esta política</h2>
+    <p>
+      Esta política puede actualizarse si en el futuro cambian las funcionalidades del complemento
+      o la forma en que utiliza la información. Cuando eso ocurra, se publicará la nueva versión en
+      esta misma dirección y se modificará la fecha de «Última actualización».
+    </p>
+  </section>
+</Policy>

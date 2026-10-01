@@ -42,9 +42,10 @@ export const projects: Project[] = [
   {
     id: "chatgpt",
     name: "Complementos para ChatGPT",
-    note: "Recuerdos para imprimir · Actividades para chicos.",
+    note: "Recuerdos para imprimir · Actividades para niños.",
     links: [
       { label: "Privacidad · Recuerdos para imprimir", url: routes.recuerdosPrivacy },
+      { label: "Privacidad · Actividades para niños", url: routes.actividadesPrivacy },
     ],
   },
 ];
