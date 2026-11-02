@@ -11,11 +11,11 @@ type Entry = {
   title: string;
   /** Diseño completo (mockup vertical largo), en /public/archivo/large. */
   full: string;
-  /** Una línea opcional bajo el título. */
-  note?: string;
   /** Destacado: se muestra más grande, junto a los proyectos. Requiere `kind`, `note` y una portada. */
   featured?: boolean;
   kind?: string;
+  /** Una línea bajo el título (solo destacados). */
+  note?: string;
 };
 
 export type ArchiveItem = Entry & { thumb: ImageMetadata; cover?: ImageMetadata };
@@ -56,36 +56,16 @@ const entries: Entry[] = [
   { id: "emanuelLagos", title: "Emanuel Lagos", full: "/archivo/large/emanuelLagos.jpg" },
   { id: "enTusManos", title: "En Tus Manos", full: "/archivo/large/enTusManos.jpg" },
   { id: "faroni", title: "Faroni", full: "/archivo/large/faroni.jpg" },
-  {
-    id: "fm",
-    title: "FM&Beyond",
-    full: "/archivo/large/fm.jpg",
-    note: "Optimización de su sitio en WordPress.",
-  },
+  { id: "fm", title: "FM&Beyond", full: "/archivo/large/fm.jpg" },
   { id: "gantes", title: "Gantes", full: "/archivo/large/gantes.jpg" },
   { id: "guadalupe", title: "Guadalupe", full: "/archivo/large/guadalupe.jpg" },
-  {
-    id: "hf",
-    title: "HF Establecimiento Metalúrgico",
-    full: "/archivo/large/hf.jpg",
-    note: "Sitio web comercial e identidad gráfica.",
-  },
-  {
-    id: "jar",
-    title: "Juventudes Agustino Recoletas",
-    full: "/archivo/large/jar.jpg",
-    note: "Sitio web parroquial, Rosario.",
-  },
+  { id: "hf", title: "HF Establecimiento Metalúrgico", full: "/archivo/large/hf.jpg" },
+  { id: "jar", title: "Juventudes Agustino Recoletas", full: "/archivo/large/jar.jpg" },
   { id: "laEsperanza", title: "La Esperanza", full: "/archivo/large/laEsperanza.jpg" },
   { id: "ligaSanPatricio", title: "Liga San Patricio", full: "/archivo/large/ligaSanPatricio.jpg" },
   { id: "liliana", title: "Liliana", full: "/archivo/large/liliana.jpg" },
   { id: "loveInLight", title: "Love In Light", full: "/archivo/large/loveInLight.jpg" },
-  {
-    id: "fg",
-    title: "The Ferneborg Group",
-    full: "/archivo/large/fg.jpg",
-    note: "Puesta a punto de su sitio en WordPress.",
-  },
+  { id: "fg", title: "The Ferneborg Group", full: "/archivo/large/fg.jpg" },
   { id: "write", title: "The Write Idea", full: "/archivo/large/write.jpg" },
   { id: "wendy", title: "Wendy", full: "/archivo/large/wendy.jpg" },
 ];
