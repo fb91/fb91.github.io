@@ -28,7 +28,7 @@ export const whatsapp = {
   greeting: "Hola Fabricio, vi tu portfolio y quería consultarte por un proyecto.",
 } as const;
 
-export type SocialIcon = "linkedin" | "github" | "instagram" | "whatsapp";
+export type SocialIcon = "linkedin" | "github" | "whatsapp";
 
 export type SocialLink = {
   label: string;
@@ -41,7 +41,6 @@ export type SocialLink = {
 export const socials: SocialLink[] = [
   { label: "LinkedIn", url: "https://www.linkedin.com/in/fabricio-bianchi/", icon: "linkedin", primary: true },
   { label: "GitHub", url: "https://github.com/fb91", icon: "github" },
-  { label: "Instagram", url: "https://www.instagram.com/fabri.b91", icon: "instagram" },
 ];
 
 /** Rutas fijas del sitio. */
