@@ -165,7 +165,10 @@ const zoom = "h-full w-full object-cover object-top transition duration-500 ease
                   class={zoom}
                 />
               </div>
-              <h3 class="mt-3 text-[0.975rem] leading-snug font-medium">{item.title}</h3>
+              {/* Una sola línea: en pantallas muy angostas baja un punto y, de última, se corta con "…". */}
+              <h3 class="mt-3 truncate text-[0.975rem] leading-snug font-medium max-[359px]:text-sm" title={item.title}>
+                {item.title}
+              </h3>
             </button>
           </li>
         ))
