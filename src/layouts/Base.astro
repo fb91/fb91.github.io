@@ -1,6 +1,7 @@
 ---
 import "../styles/global.css";
 import Footer from "../components/Footer.astro";
+import GraphBackground from "../components/GraphBackground.astro";
 import { profile } from "../lib/profile";
 
 interface Props {
@@ -9,8 +10,8 @@ interface Props {
 }
 
 const {
-  title = profile.name,
-  description = "Proyectos y cosas que fue haciendo Fabricio Bianchi.",
+  title = `${profile.name} · ${profile.title}`,
+  description = `${profile.name}, ${profile.title}. Diseño y desarrollo de sitios web, aplicaciones y sistemas a medida.`,
 } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 ---
@@ -39,7 +40,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300..600&family=Instrument+Serif:ital@0;1&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300..600&family=Manrope:wght@500..800&display=swap"
       rel="stylesheet"
     />
   </head>
@@ -51,7 +52,9 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
       Ir al contenido
     </a>
 
-    <div class="mx-auto flex min-h-dvh w-full max-w-[64rem] flex-col px-6 sm:px-10 lg:px-14">
+    <GraphBackground />
+
+    <div class="relative z-10 mx-auto flex min-h-dvh w-full max-w-[64rem] flex-col px-6 sm:px-10 lg:px-14">
       <main id="main" class="flex-1">
         <slot />
       </main>

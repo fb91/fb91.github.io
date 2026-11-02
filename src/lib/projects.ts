@@ -1,30 +1,29 @@
 import type { ImageMetadata } from "astro";
 import mana from "../assets/projects/mana.png";
 import cajarapida from "../assets/projects/cajarapida.png";
-import { routes } from "./profile";
 
+/** Proyectos propios en línea. Se muestran primero, entre los destacados. */
 export type Project = {
   id: string;
   name: string;
+  /** Qué es, en palabras de cliente: "Aplicación", "Sitio web"… */
+  kind: string;
   /** Una línea, nada más. */
   note: string;
-  /** Link principal del proyecto (si tiene). */
-  url?: string;
-  /** Texto del link principal; por defecto, el dominio. */
+  url: string;
+  /** Texto del link; por defecto, la URL. */
   urlLabel?: string;
-  /** Captura; sin captura se muestra solo texto. */
-  image?: ImageMetadata;
+  image: ImageMetadata;
   /** Fondo del marco, tomado del sitio, para que la captura no "flote". */
   frame?: string;
-  /** Links secundarios (políticas, etc.). */
-  links?: { label: string; url: string }[];
 };
 
 export const projects: Project[] = [
   {
     id: "mana",
     name: "Maná",
-    note: "Evangelio diario, Biblia y oración.",
+    kind: "Aplicación",
+    note: "Evangelio del día, Biblia y oración, en el celular o la compu.",
     url: "https://mana-app.org",
     urlLabel: "mana-app.org",
     image: mana,
@@ -33,19 +32,11 @@ export const projects: Project[] = [
   {
     id: "cajarapida",
     name: "Caja Rápida",
+    kind: "Sistema de gestión",
     note: "Caja, fiado, stock y facturación para comercios chicos.",
     url: "https://cajarapida.net",
     urlLabel: "cajarapida.net",
     image: cajarapida,
     frame: "#faf6ef",
-  },
-  {
-    id: "chatgpt",
-    name: "Complementos para ChatGPT",
-    note: "Recuerdos para imprimir · Actividades para niños.",
-    links: [
-      { label: "Privacidad · Recuerdos para imprimir", url: routes.recuerdosPrivacy },
-      { label: "Privacidad · Actividades para niños", url: routes.actividadesPrivacy },
-    ],
   },
 ];

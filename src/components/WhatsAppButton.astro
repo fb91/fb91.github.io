@@ -1,0 +1,93 @@
+---
+import SocialIcon from "./SocialIcon.astro";
+
+// El número se muestra recién después de comprobar que el clic lo hizo una persona.
+// Ver `whatsapp` en src/lib/profile.ts.
+interface Props {
+  class?: string;
+}
+
+const { class: className } = Astro.props;
+---
+
+<span data-wa class="contents">
+  <button type="button" class={className}>
+    <SocialIcon name="whatsapp" />
+    <span data-wa-label aria-live="polite">WhatsApp</span>
+  </button>
+</span>
+
+<script>
+  import { whatsapp } from "../lib/profile";
+
+  const loadedAt = performance.now();
+  let moves = 0;
+  let touched = false;
+  let typed = false;
+
+  addEventListener("pointermove", (event) => event.isTrusted && event.pointerType === "mouse" && moves++, {
+    passive: true,
+  });
+  addEventListener("touchstart", (event) => event.isTrusted && (touched = true), { passive: true });
+  addEventListener("keydown", (event) => event.isTrusted && (typed = true));
+
+  /**
+   * Señales de que el clic es de una persona: un evento real del navegador (no disparado por código),
+   * sin automatización declarada, no apenas cargada la página y con un mouse que se movió de verdad
+   * (un toque o el teclado también valen). Ningún chequeo del lado del navegador es infalible,
+   * pero alcanza para los bots que recorren páginas juntando números.
+   */
+  const isHuman = (event: MouseEvent) => {
+    if (!event.isTrusted || navigator.webdriver) return false;
+    if (performance.now() - loadedAt < 1500) return false;
+    if (event.detail === 0) return typed; // Enter o Espacio sobre el botón
+    return touched || moves >= 3;
+  };
+
+  const unseal = () =>
+    [...atob(whatsapp.sealed)]
+      .map((char, i) => String.fromCharCode(char.charCodeAt(0) ^ whatsapp.key.charCodeAt(i % whatsapp.key.length)))
+      .join("");
+
+  /** 5493411234567 → +54 9 341 123-4567 */
+  const pretty = (digits: string) =>
+    `+${digits.slice(0, 2)} ${digits.slice(2, 3)} ${digits.slice(3, 6)} ${digits.slice(6, 9)}-${digits.slice(9)}`;
+
+  // Al confirmar, cada botón pasa a ser el link al chat, con el número a la vista.
+  const reveal = (clicked: HTMLButtonElement) => {
+    const digits = unseal();
+    document.querySelectorAll<HTMLButtonElement>("[data-wa] button").forEach((button) => {
+      const link = document.createElement("a");
+      link.href = `https://wa.me/${digits}?text=${encodeURIComponent(whatsapp.greeting)}`;
+      link.target = "_blank";
+      link.rel = "noopener noreferrer";
+      link.className = button.className;
+      link.title = "Abrir el chat de WhatsApp";
+      link.append(...button.childNodes);
+      const label = link.querySelector("[data-wa-label]");
+      if (label) label.textContent = pretty(digits);
+      button.replaceWith(link);
+      if (button === clicked) link.focus();
+    });
+  };
+
+  document.querySelectorAll<HTMLButtonElement>("[data-wa] button").forEach((button) => {
+    const label = button.querySelector<HTMLElement>("[data-wa-label]");
+    const initial = label?.textContent ?? "";
+    let busy = false;
+
+    button.addEventListener("click", (event) => {
+      if (busy) return;
+      busy = true;
+      const human = isHuman(event);
+      if (label) label.textContent = "Verificando…";
+
+      setTimeout(() => {
+        busy = false;
+        if (human) return reveal(button);
+        if (label) label.textContent = "Tocá de nuevo";
+        setTimeout(() => label && !busy && (label.textContent = initial), 2500);
+      }, 450);
+    });
+  });
+</script>
