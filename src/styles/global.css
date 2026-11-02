@@ -34,7 +34,7 @@
   }
 
   ::selection {
-    background: var(--color-ink);
+    background: var(--color-accent);
     color: var(--color-paper);
   }
 

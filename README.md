@@ -1,7 +1,7 @@
 # fb91
 
 Portfolio de **Fabricio Bianchi** — Ingeniero en Sistemas de Información.
-Una sola página, pensada para clientes: presentación, redes y trabajos (destacados primero).
+Una sola página, pensada para clientes: contacto, qué hago y trabajos (destacados primero).
 
 ## Stack
 
@@ -28,7 +28,7 @@ src/
   components/SocialIcon.astro     Íconos de las redes
   components/WhatsAppButton.astro Botón que muestra el WhatsApp solo a personas
   components/Footer.astro         Pie con redes
-  lib/profile.ts                  Nombre, título, presentación, años de experiencia, WhatsApp y redes
+  lib/profile.ts                  Nombre, título, años de experiencia, WhatsApp y redes
   lib/projects.ts                 Proyectos propios en línea (destacados)
   lib/archive.ts                  Trabajos para clientes (visor); `featured` los destaca
   assets/projects/                Capturas de los proyectos (optimizadas por Astro)
@@ -46,7 +46,7 @@ Las URLs viejas (`/archivo/`, `/en/`, `/en/archive/`) redirigen a `/`.
 
 | Qué | Dónde |
 |---|---|
-| Presentación, título y redes | `src/lib/profile.ts` |
+| Nombre, título, WhatsApp y redes | `src/lib/profile.ts` |
 | Proyectos propios | `src/lib/projects.ts` |
 | Trabajos para clientes | `src/lib/archive.ts` |
 

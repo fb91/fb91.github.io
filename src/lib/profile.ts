@@ -5,8 +5,6 @@
 export const profile = {
   name: "Fabricio Bianchi",
   title: "Ingeniero en Sistemas de Información",
-  /** Presentación para clientes: qué hago, sin tecnicismos. */
-  pitch: "Diseño y desarrollo sitios web, aplicaciones y sistemas a medida para negocios, profesionales e instituciones.",
 } as const;
 
 /** Primer trabajo formal (1 de junio de 2014): de acá salen los años de experiencia. */
@@ -36,7 +34,7 @@ export type SocialLink = {
   label: string;
   url: string;
   icon: SocialIcon;
-  /** Se muestra resaltado en el encabezado. */
+  /** Red principal: en el encabezado va con texto junto a WhatsApp; las demás, agrupadas y solo con ícono en el celular. */
   primary?: boolean;
 };
 
