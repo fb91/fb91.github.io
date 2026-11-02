@@ -280,8 +280,10 @@ const zoom = "h-full w-full object-cover object-top transition duration-500 ease
 
     document.querySelectorAll<HTMLButtonElement>("[data-open]").forEach((button) => {
       button.addEventListener("click", () => {
-        show(items.findIndex((item) => item.index === Number(button.dataset.open)));
+        // Primero se abre: con el visor cerrado (oculto), volver el scroll al inicio no tiene efecto
+        // y quedaba donde lo había dejado el trabajo anterior.
         dialog.showModal();
+        show(items.findIndex((item) => item.index === Number(button.dataset.open)));
       });
     });
 
